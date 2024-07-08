@@ -16,7 +16,7 @@ const io = socketIo(server, {
   
   app.use(cors({
     origin: 'http://localhost:5173', // React app URL
-    methods: ['GET', 'POST'],
+    methods: ['GET', 'POST'], 
     allowedHeaders: ['Content-Type']
   }));
 let users = [];
@@ -25,9 +25,12 @@ io.on('connection', (socket) => {
     console.log('New client connected');
 
     socket.on('register', (name) => {
-        users.push({id: socket.id, name});
-        console.log(users);
-        io.emit('update-users', users);
+      if(users.find(user => user.name === name)) {
+        users = users.filter(user => user.name !== name);
+      }
+      users.push({id: socket.id, name});
+      console.log(users);
+      io.emit('update-users', users);
     });
 })
 

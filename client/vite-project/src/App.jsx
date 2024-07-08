@@ -1,14 +1,14 @@
 import { useEffect, useState } from 'react';
 import './App.css'
 import io from 'socket.io-client';
-import SimplePeer from 'simple-peer';
+// import SimplePeer from 'simple-peer';
 
 const socket = io('http://localhost:5000/')
 
 function App() {
   const [name, setName] = useState('');
   const [users, setUsers] = useState([]);
-  const [currentPeer, setCurrentPeer] = useState(null);
+
 
   const register = () => {
     socket.emit('register', name);
@@ -19,6 +19,8 @@ function App() {
       setUsers(users);
     });
   }, []);
+
+
   return (
     <>
       <p>Set your name: </p>
