@@ -1,1 +1,1 @@
-An application for peer-to-peer file sharing.
+An application for peer-to-peer file sharing
