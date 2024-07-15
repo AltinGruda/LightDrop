@@ -5,6 +5,9 @@ An application for peer-to-peer file sharing.
 - The data gets saved in a server to be read by the other peer which can be done by creating an answer.
 - This process is called signaling. The signaling server allows 2 peers to allow sharing data between them.
 
+### Reminder
+This application is still on the development phase.
+
 To do:
 - [x] Basic user registration and discovery
 - [ ] Implement user connection and signaling
