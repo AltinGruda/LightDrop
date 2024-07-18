@@ -3,6 +3,7 @@ const http = require('http');
 const socketIo = require('socket.io');
 const cors = require('cors');
 const { v4: uuidv4 } = require('uuid');
+const { nanoid } = require('nanoid');
 
 const app = express();
 const server = http.createServer(app);
@@ -26,18 +27,15 @@ let rooms = {};
 
 app.post('/create-room', (req, res) => {
   const { name } = req.body;
-  const roomId = uuidv4();
-  rooms[roomId] = { users: [{
-    id: uuidv4(),
-    name
-  }]}
+  const roomId = nanoid(8);
+  rooms[roomId] = { users: []}
   res.json({ roomId });
 })
 
 app.post('/join-room', (req, res) => {
   const { name, roomId } = req.body;
   if(rooms[roomId]) {
-    rooms[roomId].users.push({ id: uuidv4(), name });
+    rooms[roomId].users.push({ id: nanoid(8), name });
     res.json({ success: true });
   } else {
     res.status(404).json({ error: "Room not found!"});

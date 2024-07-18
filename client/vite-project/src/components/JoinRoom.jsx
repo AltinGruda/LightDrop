@@ -7,7 +7,7 @@ const socket = io('http://localhost:5000');
 
 const JoinRoom = () => {
   const { roomId } = useParams();
-    const name = localStorage.getItem('name');
+  const name = localStorage.getItem('name');
   const [users, setUsers] = useState([]);
 
   useEffect(() => {
@@ -29,7 +29,8 @@ const JoinRoom = () => {
   return (
     <div>
         <div>
-          <h2>Users in Room:</h2>
+          <h2>Room Key: {roomId}</h2>
+          <p>Users in Room:</p>
           <ul>
             {users.map((user) => (
               <li key={user.id}>{user.name}</li>
