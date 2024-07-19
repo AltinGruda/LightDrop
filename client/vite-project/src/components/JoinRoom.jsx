@@ -18,7 +18,12 @@ const JoinRoom = () => {
       const reader = new FileReader();
       reader.onload = (event) => {
         const buffer = event.target.result;
-        conn.send(buffer);
+        const fileData = {
+            buffer,
+            type: file.type,
+            name: file.name
+        };
+        conn.send(fileData);
       };
       reader.readAsArrayBuffer(file);
     };
@@ -54,12 +59,12 @@ const JoinRoom = () => {
         peer.on('connection', conn => {
           conn.on('data', data => {
             console.log('Received:', data);
-            const blob = new Blob([data], {type: data.type});
+            const blob = new Blob([data.buffer], {type: data.type});
             const url = window.URL.createObjectURL(blob);
             const a = document.createElement('a');
             a.style.display = 'none';
             a.href = url;
-            a.download = 'received-file';
+            a.download = data.name;
             document.body.appendChild(a);
             a.click();
             window.URL.revokeObjectURL(url);
