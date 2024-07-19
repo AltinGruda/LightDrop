@@ -2,8 +2,8 @@ const express = require('express');
 const http = require('http');
 const socketIo = require('socket.io');
 const cors = require('cors');
-const { v4: uuidv4 } = require('uuid');
 const { nanoid } = require('nanoid');
+const { PeerServer } = require('peer');
 
 const app = express();
 const server = http.createServer(app);
@@ -23,6 +23,8 @@ app.use(cors({
   allowedHeaders: ['Content-Type']
 }));
 
+const peerServer = new PeerServer({ port: 9000, path: '/peerjs' });
+
 let rooms = {};
 
 app.post('/create-room', (req, res) => {
@@ -34,21 +36,22 @@ app.post('/create-room', (req, res) => {
 
 app.post('/join-room', (req, res) => {
   const { name, roomId } = req.body;
-  if(rooms[roomId]) {
-    rooms[roomId].users.push({ id: nanoid(8), name });
-    res.json({ success: true });
+  if (rooms[roomId]) {
+    const userId = nanoid(8); // Generate a unique user ID
+    rooms[roomId].users.push({ id: userId, name });
+    res.json({ success: true, userId }); // Include userId in the response
   } else {
     res.status(404).json({ error: "Room not found!"});
   }
-})
+});
 
 io.on('connection', (socket) => {
     console.log('New client connected');
 
-    socket.on('join-room', (roomId) => {
+    socket.on('join-room', (roomId, userId) => {
       socket.join(roomId);
-      io.to(roomId).emit('user-joined', rooms[roomId].users);
-      console.log(JSON.stringify(rooms))
+      io.to(roomId).emit('user-joined', { userId, users: rooms[roomId].users });
+      console.log(JSON.stringify(rooms));
     });
 
     socket.on('disconnect', () => {
