@@ -45,7 +45,7 @@ const JoinRoom = () => {
       });
       if (response.data.success) {
         const { userId } = response.data;
-        socket.emit("join-room", roomId);
+        socket.emit("join-room", roomId, userId);
         // Create a new PeerJS instance for this user
         const peer = new Peer(userId, {
           host: "localhost",
@@ -80,10 +80,19 @@ const JoinRoom = () => {
             connectToNewUser(newUserId);
           }
         });
+
+        socket.on("user-disconnected", ({ users }) => {
+          setUsers(users);
+        });
       }
     };
     fetchUsers();
   }, [name, roomId]);
+
+  if (users.length === 0) {
+    return <div>Room does not exist.</div>;
+  }
+  console.log(users);
 
   return (
     <div>
