@@ -8,20 +8,19 @@ const { PeerServer } = require('peer');
 const app = express();
 const server = http.createServer(app);
 app.use(express.json())
+app.use(cors());
 const io = socketIo(server, {
-    cors: {
-      origin: "http://localhost:5173", // React app URL
-      methods: ["GET", "POST"],
-      allowedHeaders: ["my-custom-header"],
-      credentials: true
-    }
-});
+  cors: {
+    origin: '*',
+  }
+})
   
-app.use(cors({
-  origin: 'http://localhost:5173', // React app URL
-  methods: ['GET', 'POST'], 
-  allowedHeaders: ['Content-Type']
-}));
+// app.use(cors({
+//   origin: 'http://localhost:5173', // React app URL
+//   methods: ['GET', 'POST'], 
+//   allowedHeaders: ['Content-Type']
+// }));
+
 
 const peerServer = new PeerServer({ port: 9000, path: '/peerjs' });
 
