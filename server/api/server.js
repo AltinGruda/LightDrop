@@ -27,7 +27,7 @@ const peerServer = new PeerServer({ port: 9000, path: '/peerjs' });
 let rooms = {};
 
 app.get('/', (req, res) => {
-  res.json('Hi');
+  res.send('Hi');
 })
 
 app.post('/create-room', (req, res) => {
