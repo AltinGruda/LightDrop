@@ -5,7 +5,7 @@ import axios from "axios";
 import { Peer } from "peerjs";
 import { motion } from "framer-motion";
 
-const socket = io("http://localhost:5000/");
+const socket = io("https://light-drop-api.vercel.app/");
 
 const JoinRoom = () => {
   const { roomId } = useParams();
@@ -40,10 +40,13 @@ const JoinRoom = () => {
     };
 
     const fetchUsers = async () => {
-      const response = await axios.post("http://localhost:5000/join-room", {
-        roomId,
-        name,
-      });
+      const response = await axios.post(
+        "https://light-drop-api.vercel.app/join-room",
+        {
+          roomId,
+          name,
+        }
+      );
       if (response.data.success) {
         const { userId } = response.data;
         socket.emit("join-room", roomId, userId);
