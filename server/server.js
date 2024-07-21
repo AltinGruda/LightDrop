@@ -29,6 +29,10 @@ const peerServer = new PeerServer({ port: 9000, path: '/peerjs' });
 
 let rooms = {};
 
+app.get('/', (req, res) => {
+  res.json('Hi');
+})
+
 app.post('/create-room', (req, res) => {
   const roomId = nanoid(8);
   rooms[roomId] = { users: []}
