@@ -7,6 +7,7 @@ const { PeerServer } = require('peer');
 
 const app = express();
 const server = http.createServer(app);
+const port = process.env.PORT || 5000; // Default to 3000 if PORT is not set
 app.use(express.json())
 app.use(cors());
 const io = socketIo(server, {
@@ -27,7 +28,7 @@ const peerServer = new PeerServer({ port: 9000, path: '/peerjs' });
 let rooms = {};
 
 app.get('/', (req, res) => {
-  res.send('Hi');
+  return res.send('Hi');
 })
 
 app.post('/create-room', (req, res) => {
@@ -85,4 +86,6 @@ io.on('connection', (socket) => {
 
 })
 
-server.listen(5000, () => console.log('Server started at port 5000'));
+server.listen(port, () => console.log(`Server started at port ${port}`));
+
+module.exports = app;
