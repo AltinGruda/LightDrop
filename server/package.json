@@ -14,6 +14,7 @@
     "express": "^4.19.2",
     "http": "^0.0.1-security",
     "nanoid": "^3.3.7",
+    "node-cron": "^3.0.3",
     "peer": "^1.0.2",
     "socket.io": "^4.7.5",
     "uuid": "^10.0.0"

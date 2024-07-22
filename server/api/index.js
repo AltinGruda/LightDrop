@@ -4,6 +4,7 @@ const socketIo = require('socket.io');
 const cors = require('cors');
 const { nanoid } = require('nanoid');
 const { PeerServer } = require('peer');
+const cron = require('node-cron');
 
 const app = express();
 const server = http.createServer(app);
@@ -29,6 +30,16 @@ let rooms = {};
 
 app.get('/', (req, res) => {
   return res.send('Hi');
+})
+
+app.get('/ping', (req, res) => {
+  const now = new Date();
+  console.log(`Ping received at ${now.toISOString()}`);
+  res.send('Pong');
+})
+
+cron.schedule('*/12 * * * *', async () => {
+  await fetch(`http://localhost:${port}/ping`);
 })
 
 app.post('/create-room', (req, res) => {
