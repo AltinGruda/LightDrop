@@ -38,7 +38,7 @@ app.get('/ping', (req, res) => {
   res.send('Pong');
 })
 
-cron.schedule('*/12 * * * *', async () => {
+cron.schedule('*/14 * * * *', async () => {
   await fetch(`http://localhost:${port}/ping`);
 })
 
