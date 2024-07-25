@@ -12,9 +12,12 @@ const CreateRoom = () => {
   const handleCreateRoom = async () => {
     try {
       const name = localStorage.getItem("name");
-      const response = await axios.post("http://localhost:5000/create-room", {
-        name,
-      });
+      const response = await axios.post(
+        "https://lightdrop.onrender.com/create-room",
+        {
+          name,
+        }
+      );
       setRoomId(response.data.roomId);
       toast("Room has been created!");
     } catch (error) {
@@ -25,7 +28,7 @@ const CreateRoom = () => {
   const handleJoinRoom = async () => {
     try {
       const response = await axios.get(
-        `http://localhost:5000/room/${roomInput}`
+        `https://lightdrop.onrender.com/room/${roomInput}`
       );
       console.log(response);
       navigate(`/join-room/${roomInput}`);

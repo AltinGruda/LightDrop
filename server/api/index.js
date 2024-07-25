@@ -39,7 +39,7 @@ app.get('/ping', (req, res) => {
 })
 
 cron.schedule('*/14 * * * *', async () => {
-  await fetch(`http://localhost:${port}/ping`);
+  await fetch('https://lightdrop.onrender.com/ping');
 })
 
 app.post('/create-room', (req, res) => {

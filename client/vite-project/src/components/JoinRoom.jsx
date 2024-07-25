@@ -5,7 +5,7 @@ import axios from "axios";
 import { Peer } from "peerjs";
 import { motion } from "framer-motion";
 
-const socket = io("http://localhost:5000/");
+const socket = io("https://lightdrop.onrender.com/");
 
 const JoinRoom = () => {
   const { roomId } = useParams();
@@ -40,18 +40,21 @@ const JoinRoom = () => {
     };
 
     const fetchUsers = async () => {
-      const response = await axios.post("http://localhost:5000/join-room", {
-        roomId,
-        name,
-      });
+      const response = await axios.post(
+        "https://lightdrop.onrender.com/join-room",
+        {
+          roomId,
+          name,
+        }
+      );
       if (response.data.success) {
         const { userId } = response.data;
         socket.emit("join-room", roomId, userId);
         // Create a new PeerJS instance for this user
         const peer = new Peer(userId, {
-          host: "localhost",
-          port: 9000,
-          path: "/peerjs",
+          // host: "lightdrop.onrender.com/",
+          // port: 9000,
+          // path: "/peerjs",
         });
 
         setPeerInstance(peer);
