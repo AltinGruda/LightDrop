@@ -17,7 +17,8 @@
     "react-dom": "^18.3.1",
     "simple-peer": "^9.11.0",
     "socket.io-client": "^4.7.5",
-    "sonner": "^1.5.0"
+    "sonner": "^1.5.0",
+    "vercel": "^35.2.0"
   },
   "devDependencies": {
     "@rollup/plugin-inject": "^5.0.5",

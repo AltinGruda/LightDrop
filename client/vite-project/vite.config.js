@@ -7,4 +7,9 @@ export default defineConfig({
   define: {
     global: {},
   },
+  build: {
+    rollupOptions: {
+      external: ["react-router", "react-router-dom"],
+    },
+  },
 });
