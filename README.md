@@ -10,5 +10,5 @@ This application is still on the development phase.
 
 To do:
 - [x] Basic user registration and discovery
-- [ ] Implement user connection and signaling
-- [ ] Implement file transfer
+- [x] Implement user connection and signaling
+- [x] Implement file transfer
