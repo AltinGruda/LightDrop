@@ -1,6 +1,6 @@
 LightDrop gives you the power to securely share your files with your friends.
 
-Live at: https://lightdrop.vercel.app
+Live app at: https://lightdrop.vercel.app
 
 ## How it works
 - Peer 1 creates an offer for a connection between them. This results in a SDP object (session description protocol) which contains the data of the peer to peer connection
