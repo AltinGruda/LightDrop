@@ -10,7 +10,3 @@ Live app at: https://lightdrop.vercel.app
 ### Reminder
 This application is still on the development phase.
 
-To do:
-- [x] Basic user registration and discovery
-- [x] Implement user connection and signaling
-- [x] Implement file transfer
